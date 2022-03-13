@@ -1,69 +1,74 @@
-<?php return array (
-  'root' => 
-  array (
-    'pretty_version' => '1.0.0+no-version-set',
-    'version' => '1.0.0.0',
-    'aliases' => 
-    array (
+<?php return array(
+    'root' => array(
+        'pretty_version' => 'dev-master',
+        'version' => 'dev-master',
+        'type' => 'library',
+        'install_path' => __DIR__ . '/../../',
+        'aliases' => array(),
+        'reference' => '82325e76cede063e8fdc9efd8958489b7b54991f',
+        'name' => '__root__',
+        'dev' => true,
     ),
-    'reference' => NULL,
-    'name' => '__root__',
-  ),
-  'versions' => 
-  array (
-    '__root__' => 
-    array (
-      'pretty_version' => '1.0.0+no-version-set',
-      'version' => '1.0.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => NULL,
+    'versions' => array(
+        '__root__' => array(
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../../',
+            'aliases' => array(),
+            'reference' => '82325e76cede063e8fdc9efd8958489b7b54991f',
+            'dev_requirement' => false,
+        ),
+        'elasticsearch/elasticsearch' => array(
+            'pretty_version' => '7.x-dev',
+            'version' => '7.9999999.9999999.9999999-dev',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../elasticsearch/elasticsearch',
+            'aliases' => array(),
+            'reference' => '24c51c05103bf43fb9847acab039cba1d6e43173',
+            'dev_requirement' => false,
+        ),
+        'ezimuel/guzzlestreams' => array(
+            'pretty_version' => '3.0.1',
+            'version' => '3.0.1.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../ezimuel/guzzlestreams',
+            'aliases' => array(),
+            'reference' => 'abe3791d231167f14eb80d413420d1eab91163a8',
+            'dev_requirement' => false,
+        ),
+        'ezimuel/ringphp' => array(
+            'pretty_version' => '1.2.0',
+            'version' => '1.2.0.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../ezimuel/ringphp',
+            'aliases' => array(),
+            'reference' => '92b8161404ab1ad84059ebed41d9f757e897ce74',
+            'dev_requirement' => false,
+        ),
+        'guzzlehttp/ringphp' => array(
+            'dev_requirement' => false,
+            'replaced' => array(
+                0 => '1.2.0',
+            ),
+        ),
+        'psr/log' => array(
+            'pretty_version' => '1.1.4',
+            'version' => '1.1.4.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../psr/log',
+            'aliases' => array(),
+            'reference' => 'd49695b909c3b7628b6289db5479a1c204601f11',
+            'dev_requirement' => false,
+        ),
+        'react/promise' => array(
+            'pretty_version' => 'v2.9.0',
+            'version' => '2.9.0.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../react/promise',
+            'aliases' => array(),
+            'reference' => '234f8fd1023c9158e2314fa9d7d0e6a83db42910',
+            'dev_requirement' => false,
+        ),
     ),
-    'elasticsearch/elasticsearch' => 
-    array (
-      'pretty_version' => 'v7.10.0',
-      'version' => '7.10.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => 'f4a5741f1d1966a4d0a3a3f68666e6d81432c343',
-    ),
-    'ezimuel/guzzlestreams' => 
-    array (
-      'pretty_version' => '3.0.1',
-      'version' => '3.0.1.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => 'abe3791d231167f14eb80d413420d1eab91163a8',
-    ),
-    'ezimuel/ringphp' => 
-    array (
-      'pretty_version' => '1.1.2',
-      'version' => '1.1.2.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '0b78f89d8e0bb9e380046c31adfa40347e9f663b',
-    ),
-    'psr/log' => 
-    array (
-      'pretty_version' => '1.1.3',
-      'version' => '1.1.3.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '0f73288fd15629204f9d42b7055f72dacbe811fc',
-    ),
-    'react/promise' => 
-    array (
-      'pretty_version' => 'v2.8.0',
-      'version' => '2.8.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => 'f3cff96a19736714524ca0dd1d4130de73dbbbc4',
-    ),
-  ),
 );

@@ -2,12 +2,13 @@
 require 'vendor/autoload.php';
 class Elastic {
     private $hosts = [
-        'http://localhost:9200' //IP+端口
+        'http://172.18.0.6:9200' //IP+端口
     ];
     private  $client;
     public function __construct()
     {
         $this->client = Elasticsearch\ClientBuilder::create()->setHosts($this->hosts)->build();
+//        $this->dd( $this->client);
     }
 
     # 创建索引
@@ -33,9 +34,9 @@ class Elastic {
      */
     public function createInfo($indexName) {
         $params = [
-            'index' => "{$indexName}",
-            'type' => 'goods',
-            'id'    => '2',
+            'index' => "goods",
+            'type' => '_doc',
+            'id'    => '1',
             'body'  => [
                 'goods_name' => 'abc edf ',
                 'cn_name' => '你好 泳衣',
@@ -57,13 +58,13 @@ class Elastic {
         ini_set('memory_limit','2048M');    // 临时设置最大内存占用为1G
         set_time_limit(0);
 
-        $connect = mysqli_connect("127.0.0.1","root","123456","test");
+        $connect = mysqli_connect("172.18.0.4","root","123456","test");
         if (mysqli_connect_errno($connect))
         {
             echo "连接 MySQL 失败: " . mysqli_connect_error();exit;
         }
         mysqli_set_charset($connect,"utf8");
-        $sql = "select * from ly_goods";
+        $sql = "select * from goods limit 10";
         $result = mysqli_query($connect,$sql);
 
         // 获取数据
@@ -73,41 +74,42 @@ class Elastic {
         mysqli_free_result($result);
 
         mysqli_close($connect);
-        $arr = array_chunk($res,20000);
-//        $this->dd(count($arr));
+        $arr = array_chunk($res,10000);
+//        $this->dd($arr);
 //        var_dump($arr);exit;
 
 
-        foreach ($arr as $k) {
+        foreach ($arr as $k => $v) {
             # 封装数据
-            foreach ($k as $document) {
+            foreach ($v as $document) {
                 $params['body'][] = [
                     'index' => [
                         '_index' => "{$indexName}",
-                        '_id'    => $document['goods_id'],
-                        '_type' => 'goods'
+                        '_id'    => $document['id'],
+//                        'type'   => '_doc'
                     ]
                 ];
 
                 $params['body'][] = [
-                    'goods_id'       => (int)$document['goods_id'],
+                    'id'             => (int)$document['id'],
                     'goods_name'     => $document['goods_name'],
                     'cn_name'        => $document['cn_name'],
-                    'shop_price'     => (float)$document['shop_price'],
+                    'shop_price'     => (double)$document['shop_price'],
                     'original_img'   => $document['original_img'],
                     'mtime'          => $document['mtime']
                 ];
             }
-
+//$this->dd($params);
             # 插入es
             if (isset($params) && !empty($params)) {
+//                $this->dd($params);
                 $response = $this->client->bulk($params);
-//            $this->dd($response);
-                echo "ok";
+            $this->dd($response);
+                echo "第{$k}组执行完成".PHP_EOL;
             }
             unset($params);
         }
-        exit;
+        echo "都录入完成！".PHP_EOL;
     }
 
     /**
@@ -167,8 +169,8 @@ class Elastic {
 
 $es = new Elastic();
 //$es->createIndex('test'); # 创建goods 索引
-//$es->createInfo('test'); # 增加数据
-$es->createAll('oms'); # 批量增加数据
+$es->createInfo('goods'); # 增加数据
+//$es->createAll('goods'); # 批量增加数据
 //$es->update('test',2); # 更新数据
 //$es->delIndex('test'); # 删除 goods 索引
 //$es->delIndex('test',1); # 删除 数据
